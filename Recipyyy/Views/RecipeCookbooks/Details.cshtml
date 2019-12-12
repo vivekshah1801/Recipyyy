@@ -1,0 +1,34 @@
+﻿@model Recipyyy.Models.RecipeCookbook
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RecipeCookbook</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.cookbook.cookbookName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cookbook.cookbookName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.recipe.recipeTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.recipe.recipeTitle)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

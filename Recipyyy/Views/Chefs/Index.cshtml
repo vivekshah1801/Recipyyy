@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Recipyyy.Models.Chef>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+    <section>
+                <div class="container">
+                
+                    <div class="row">
+                        <div class="col text-center">
+                                <div style="font-size:70px;color:black;">Our Chefs</div>
+                        </div>
+
+                        <div class="input-with-icon col-md-12 mb-4" style="padding-left:0px;padding-right:0px">
+                            <input type="text" id="search" placeholder="Search Here" class="form-control" />
+                            <i class="ti-search mx-2"></i>
+                        </div>
+                    </div>
+                    <hr/>
+                @foreach (var item in Model) {    
+                    <div class="row search">
+                        <div class="col-lg-12 col-md-12 col-sm-12 p-0">
+                            <!-- Single Large Job List -->
+                            <div class="job-new-list">
+                                <div class="vc-thumb">
+                                    <!-- ADD IMAGE HERE -->
+                                    <img class="img-fluid rounded-circle" style="height:100px;width:100px;" src="@Url.Content( item.chefImagePath)" alt="">
+                                </div>
+                                <div class="vc-content">
+                                    <h5 class="title"><a href="#">@Html.DisplayFor(modelItem => item.chefName)</a></h5>
+                                    <p>@Html.DisplayFor(modelItem => item.chefBio)</p>
+                                   
+                                    <ul class="vc-info-list mt-2 d-none">
+                                        <li class="list-inline-item"><h5>@Html.ActionLink("Edit", "Edit", new { id = item.chefId},new { @class = "btn btn-secondary" })</h5></li>
+                                        <li class="list-inline-item"><h5>@Html.ActionLink("Delete", "Delete", new { id=item.chefId },new { @class = "btn btn-outline-danger"}) </h5></li>
+                                    </ul>
+
+                                    <ul class="vc-info-list mt-2">
+                                        <li class="list-inline-item" style="visibility:hidden"><h5>@Html.ActionLink("Edit", "Edit", new { id = item.chefId }, new { @class = "btn btn-secondary" })</h5></li>
+                                        <li class="list-inline-item" style="visibility:hidden"><h5>@Html.ActionLink("Delete", "Delete", new { id = item.chefId }, new { @class = "btn btn-outline-danger" }) </h5></li>
+                                    </ul>
+
+                                </div>
+                                @Html.ActionLink("View More", "Details", new { id=item.chefId },new{ @class = "btn btn-outline-info bn-det" })
+                            </div>    
+                        </div>
+                    </div>
+                }    
+                </div>  
+    </section>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        function contains(t1, t2) {
+            if (t1.indexOf(t2) != -1) {
+                return true;
+            }
+        }
+
+        $("#search").keyup(function () {
+            var searchkey = $("#search").val().toLowerCase();
+            $(".search").each(function () {
+                if (!contains($(this).text().toLowerCase(), searchkey)) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+
+                }
+            })
+        });
+    });
+</script>

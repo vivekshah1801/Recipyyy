@@ -3,38 +3,59 @@
     ViewBag.Title = "Register";
 }
 
-<h2>@ViewBag.Title.</h2>
+<!-- ============================ Register ================================== -->
+<section id="registerForm">
+    <div class="container col-md-8 justify-content-center form-horizontal">
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <h4 class="modal-header-title">Register <span>Step 0</span></h4>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
+            <div class="login-form">
+                <form>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        <label>User Email</label>
+                        <div class="input-with-icon">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" ,required="required"})
+                            <i class="ti-user"></i>
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="input-with-icon">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", required = "required" })
+                            <i class="ti-unlock"></i>
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <div class="input-with-icon">
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", required = "required" })
+                            <i class="ti-unlock"></i>
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" value="Register" class="btn btn-primary btn-md full-width pop-login">Register</button>
+                    </div>
+                    
+                </form>
+            </div>
+
+        }
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
-}
+</section>
+<div class="clearfix"></div>
+<!-- ============================ Register end================================== -->
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

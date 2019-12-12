@@ -1,0 +1,98 @@
+﻿@model Recipyyy.Models.Chef
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<div>
+    
+
+
+    <section class="page-title-banner" style="background-image:url(assets/img/des-1.jpg);">
+                <div class="container">
+                    <div class="row m-0 align-items-end detail-swap">
+                        <div class="tr-list-wrap">
+                            <div class="tr-list-detail">
+                                <div class="tr-list-thumb">
+                                    <!--<img src="assets/img/photos.png" class="img-responsive" alt="" />-->
+                                    <img src="@Url.Content(Model.chefImagePath)" class="img img-responsive" style="width:100%;height:100%;"/>
+                                </div>
+                                <div class="tr-list-info">
+                                    <h4 class="mb-1">@Html.DisplayFor(model => model.chefName)</h4>
+                                    <p class="mb-1">@Html.DisplayFor(model => model.chefBio)</p>
+                                    <p class="mb-1">@Html.DisplayFor(model => model.chefRating)<p>
+                                </div>
+                            </div>
+                            <div class="listing-detail_right">
+                                <div class="listing-detail-item d-none">
+                                    <a href="#" class="btn btn-list full-width mb-2 color--success"><i class="ti-hand-point-right mr-2"></i> Follow This</a><br>
+                                    <a href="#" class="btn btn-list full-width color--linkedin"><i class="ti-email mr-2"></i> Send a Message</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </section>
+    <div class="container my-5">
+
+        <div class="row">
+            <!------------------------------------------- -->
+            @foreach (var item in ViewBag.recdRecipes)
+            {
+                <div class="col-lg-4 col-md-4">
+                    <div class="blog-grid-wrap mb-4" data-aos="fade-up" data-aos-duration="1200">
+                        <div class="blog-grid-thumb">
+                            <a href="blog-detail.html"><img src="@Url.Content(item.recipeImagePath)" class="img img-responsive" alt="" style="height:200px !important;"/></a>
+                            <div class="bg-cat-info">
+                                <div class="post-m-info">
+                                    <h5 class="pm-date">12</h5>
+                                    <h5 class="pm-month">Dec</h5>
+                                </div>
+                            </div>
+
+                            <h3 class="post-cat">@item.recipeType</h3>
+                            
+                            
+
+                        </div>
+                        <div class="blog-grid-content">
+                            <a href="@Url.Action("Details","Recipes",new { id=item.recipeId })"><h1 class=" display-6">@item.recipeTitle</h1></a>
+                            <h6><span class="text-muted">@item.cusine.cuisineName</span></h6>
+                            <p class="text-truncate">@item.recipeDescription</p>
+
+                            Tags:<span id="hashtags" class="text-info"> @item.recipeTags</span>
+                        </div>
+                        <div class="blog-grid-meta">
+                            <div class="gb-info-author">
+                                <p><strong>By </strong>@item.chef.chefName</p>
+                            </div>
+                            <div class="gb-info-cmt">
+                                <ul>
+                                    <li><i class="ti-timer"></i>@item.recipePrepTime</li>
+                                    <li><i class="ti-user"></i>@item.recipeServesFor</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+            }
+            <!--------------------------------------------->
+
+        </div>
+        @Html.ActionLink("View Other Chefs", "Index", null, new { @class = "btn btn-secondary mt-2 mx-2 col-md-12 btn-block" })
+
+
+    </div>
+
+    
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.chefId })
+</p>

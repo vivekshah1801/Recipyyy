@@ -1,0 +1,40 @@
+﻿@model Recipyyy.Models.RecipeCookbook
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>RecipeCookbook</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.cookbook.cookbookName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cookbook.cookbookName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.recipe.recipeTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.recipe.recipeTitle)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

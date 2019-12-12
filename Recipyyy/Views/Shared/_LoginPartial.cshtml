@@ -3,20 +3,19 @@
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
-
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
+        @Html.AntiForgeryToken()
+       
+        <div class="act-buttons">
+            @Html.ActionLink("Logout", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "btn btn-info font-14 m-0 mr-2 ml-4", @href = "javascript:document.getElementById('logoutForm').submit()" })
+        </div>
     }
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+    <div class="act-buttons">
+        @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-info font-14 m-0 ml-2" })
+    </div>
+    <div class="act-buttons">
+        @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { title = "Manage", @class = "btn btn-info font-14 m-0 mr-2 ml-4" })
+    </div>
 }

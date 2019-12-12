@@ -2,30 +2,115 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<!-- ============================ Hero Banner  Start================================== -->
+<div class="hero-header jumbo-banner text-center" style="background: url(/Content/img/bn-1.jpg);" data-overlay="8">
+    <div class="container">
+        <h1>R E C I P Y Y Y</h1>
+        <p class="lead">Explore Wide Range Of Recipes</p>
+        <form class="no-border">
+            <div class="row m-0 pt-6 justify-content-center text-center">
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+                <div class="col-lg-2 col-md-2 col-sm-12 pl-0 text-center justify-content-center">
+                    @Html.ActionLink("Explore More", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-primary full-width mt-3" })
+                </div>
+            </div>
+        </form>
     </div>
 </div>
+<!-- ============================ Hero Banner End ================================== -->
+<!-- ============================ Cuisine List ================================== -->
+<section>
+    <div class="container">
+
+        <div class="row">
+            <div class="col text-center">
+                <div class="sec-heading mx-auto">
+                    <p>Deliciousness Of Recipyyy</p>
+                    <h2>Recent Recipies</h2>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="row">
+            <!-- Single Job -->
+            @foreach (var recipeitem in ViewBag.homeRecipe)
+            {
+                <div class="item col-md-3 ">
+                    <div class="job-grid style-1">
+                        <div class="job-grid-wrap">
+                            <span class="job-type j-part-time">Part Time</span>
+                            <div class="job-grid-thumb">
+                                <a href="job-detail.html"><img src="@Url.Content(recipeitem.recipeImagePath)" class="img-fluid mx-auto" alt="" /></a>
+                            </div>
+                            <h4 class="job-title"><a href="@Url.Action("Details","Recipes",new { id=recipeitem.recipeId })">@recipeitem.recipeTitle</a></h4>
+                            <hr>
+                            <div class="job-grid-detail">
+                                @recipeitem.recipeDescription
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</section>
+<!-- ============================ Cuisine List End ================================== -->
+<!-- ============================ Popular Candidate Start ================================== -->
+<section class="image-bg image-light text-center" style="background: url(/Content/img/des-9.jpg);" data-overlay="8">
+    <div class="container">
+        <div class="row justify-content-center">
+
+            <div class="col text-center">
+                <div class="sec-heading light mx-auto">
+                    <p>Popular Chefs</p>
+                    <h2>Best of Chefs</h2>
+                </div>
+            </div>
+
+            <div class="row m-0">
+                @foreach (var chefitem in @ViewBag.homeChef)
+                {
+                    <!-- Popular Candidate -->
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="best-candidate">
+
+                            <div class="best-candidate-wrap">
+                                <div class="best-candidate-thumb">
+                                    <img src="@Url.Content(chefitem.chefImagePath)" style="height:100%; width:100%;" class="img-fluid mx-auto rounded-circle" alt="" />
+                                    <div class="c-ac-status"><i class="ti-check"></i></div>
+                                </div>
+                                <h4 class="candidate-name"><a href="@Url.Action("Details","Chefs",new { id=chefitem.chefId })">@chefitem.chefName</a></h4>
+                                <span class="can-post word-wrap text-justify">@chefitem.chefBio</span>
+
+                                <div class="best-candidate-info">
+                                    <div class="year-exp"></div>
+                                    <div class="c-total-award"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+                
+
+
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- ============================ Popular Candidate End ================================== -->
+<!-- ============================ Category Start ================================== -->
+
+<div class="clearfix mb-5"></div>
+
+<!-- ============================ Category End ================================== -->
+<!-- ============================ Testimonial  Start================================== -->
+<!--
+<section class="image-bg text-center" style="background: url(/Content/img/bn-3.jpg);" data-overlay="8">
+
+</section>
+<!-- ============================ Testimonial End ================================== -->

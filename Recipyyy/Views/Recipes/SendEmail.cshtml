@@ -1,0 +1,72 @@
+﻿
+
+@{
+    ViewBag.Title = "SendEmail";
+}
+
+
+
+<div class="container col-md-8">
+    <div class="row mb-5">
+        <div class="col-md-4 ">
+            <div class="job-grid style-1">
+                <div class="job-grid-wrap">
+
+                    <div class="text-center py-0 mx-auto  " style=" width:200px">
+                        <img src="@Url.Content(ViewBag.emailRecipes.recipeImagePath)" class="img-fluid mx-auto" alt="" />
+                    </div>
+                    <h3 class="job-title mt-3">@ViewBag.emailRecipes.recipeTitle</h3>
+                    <hr>
+                    <div class="job-grid-detail text-left">
+                        <p>Cuisine:<Span><b>@ViewBag.emailRecipes.cusine.cuisineName</b></Span></p>
+                    </div>
+                    <div class="job-grid-detail text-left">
+                        <p>Chef:<b>@ViewBag.emailRecipes.chef.chefName</b></p>
+                    </div>
+                    <div class="job-grid-detail text-left">
+                        <p>Type:<b>@ViewBag.emailRecipes.recipeType</b></p>
+                    </div>
+                    <div class="job-grid-detail text-left">
+                        <p>Description:<b>@ViewBag.emailRecipes.recipeDescription</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 ">
+            <div class="job-grid style-1">
+                <div class="job-grid-wrap text-left">
+                    <form method="post" action="">
+
+                        <span class="form-control-static">
+                            Receiver:
+                        </span>
+                        <input class="form-control mb-4" type="text" name="receiver" required />
+                
+                        <input class="form-control d-none" type="text" name="subject" value="Recipe on Recipyyy" />
+
+                        
+                        
+                        <textarea class="form-control d-none"  type="text" name="message">Hello, &NewLine;Check this amazing recipe on : http://localhost:60583/Recipes/Details/@ViewBag.emailRecipes.recipeId &NewLine;&NewLine;-- Team Recipyyy</textarea>
+                        <input value="@ViewBag.emailRecipes.recipeId" type="hidden" name="rID" />
+
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <button type="submit" value="Create" class="btn btn-info btn-md full-width">Send Recipe<i class="ml-2 ti-arrow-right"></i></button>
+                            </div>
+                            <div class="col-md-4">
+                                @Html.ActionLink("Cancel", "Details", "Recipes", new { id = ViewBag.emailRecipes.recipeId }, new { @class = "btn btn-secondary btn-md full-width" })
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

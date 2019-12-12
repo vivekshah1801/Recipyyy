@@ -1,0 +1,290 @@
+﻿@model Recipyyy.Models.Recipe
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<!-- ======================= Start Banner ===================== -->
+<section class="page-title-banner" style="background-image:url(assets/img/des-1.jpg);">
+    <div class="container">
+        <div class="row m-0 align-items-end detail-swap">
+            <div class="tr-list-wrap">
+                <div class="tr-list-detail">
+                    <div class="tr-list-thumb">
+                        <img src="@Url.Content(Model.recipeImagePath)" class="img img-responsive" alt="" style="width:100%;height:100%" />
+                    </div>
+                    <div class="tr-list-info">
+                        <h4 class="mb-1">@Html.DisplayFor(model => model.recipeTitle)</h4>
+                        <p class="mb-1">
+                            <i class="ti-user mr-2"></i><a class="text-light" href="@Url.Action("Details","Chefs",new { id = Model.chef.chefId })"> @Html.DisplayFor(model => model.chef.chefName)</a>
+                        </p>
+                        <div class="rating-review">
+                            <i class="ti-star filled"></i>
+                            <i class="ti-star filled"></i>
+                            <i class="ti-star filled"></i>
+                            <i class="ti-star filled"></i>
+                            <i class="ti-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="listing-detail_right">
+                    <div class="listing-detail-item">
+                        
+                        <a href="@Url.Action("SendEmail","Recipes",new { id=Model.recipeId})" class="btn btn-list full-width color--linkedin"><i class="ti-email mr-2"></i> Share Recipe</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ======================= End Banner ===================== -->
+<!-- ============== Job Detail ====================== -->
+<section class="tr-single-detail gray-bg">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-8 col-sm-12">
+
+                <!-- Job Overview -->
+                <div class="tr-single-box">
+                    <div class="tr-single-header">
+                        <h4><i class="ti-info"></i>Recipe Overview</h4>
+                    </div>
+                    <div class="tr-single-body">
+                        <div>
+                            <b> Description : &nbsp;</b>
+                            <p>@Model.recipeDescription</p>
+                        </div>
+
+                        <div>
+                            <b> Tags : &nbsp;</b>
+                            <p>@Model.recipeTags</p>
+                        </div>
+
+                        <div class="row">
+
+
+
+                            <div class="col-md-6">
+                                <p> </p><b> Type : &nbsp;</b>
+                                @Model.recipeType</p>
+                                <p> </p><b> Cuisine : &nbsp;</b>
+                                @Model.cusine.cuisineName</p>
+                                <p> </p><b> Serves For : &nbsp;</b>
+                                @Model.recipeServesFor</p>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <p> </p><b> Preparation Time : &nbsp;</b>
+                                @Model.recipePrepTime</p>
+                                <p> </p><b> Date Added :&nbsp;</b>
+                                @Model.recipeCreationDate.ToString("MMM dd, yyyy")</p>
+                                <p> </p><b> Nutrition Facts : &nbsp;</b>
+                                @Model.recipeNutritionFacts</p>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- Job Qualifications -->
+                <div class="tr-single-box">
+                    <div class="tr-single-header">
+                        <h4><i class="ti-cup"></i>Ingredients</h4>
+                    </div>
+                    <div class="tr-single-body" style="white-space: pre-line;">
+                        @Model.recipeIngredients
+                    </div>
+                </div>
+
+                <div class="tr-single-box">
+                    <div class="tr-single-header">
+                        <h4><i class="ti-cup"></i>Directions</h4>
+                    </div>
+                    <div class="tr-single-body" style="white-space: pre-line;">
+                        @Model.recipeDirection
+                    </div>
+                </div>
+
+
+                <!-- comments Box -->
+                <div class="tr-single-box">
+                    <div class="tr-single-header">
+                        <h4><i class="ti-cup"></i>Recipe Comments</h4>
+                        @Html.ActionLink("Add Comment +","Create","Comments", new { @id = Model.recipeId },new { @class="btn btn-outline-success btn-sm float-right mr-2 " })
+                    </div>
+                    <div class="tr-single-body">
+                        <ul class="qa-skill-list">
+
+@foreach (var item in ViewBag.comments)
+{
+                            <!-- Single List -->
+                            <li>
+                                <div class="qa-skill-box p-3">
+                                    <h4 class="qa-skill-title d-inline">@item.chef.chefName &nbsp;</h4><span class="">Says</span>
+                                    <div class="qa-content">
+                                        <p>@item.commentText</p>
+                                        <p class="text-right">
+                                            @if ( item.chef.chefId == ViewBag.currentChefId)
+                                            {
+                                            <a href=@Url.Action("Edit", "Comments", new { @id = item.commentId })><span class="ti-pencil text-danger mx-2"></span></a>
+                                            }
+
+                                            @if ((item.chef.chefId == ViewBag.currentChefId) || (Model.chefId == ViewBag.currentChefId))
+                                            {
+                                            <a href=@Url.Action("DeleteConfirmed", "Comments", new { @id = item.commentId, @rid = Model.recipeId })><span class="ti-trash text-primary mx-2"></span></a>
+                                            }
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+
+}
+
+                        </ul>
+                    </div>
+                </div>
+
+
+
+                @Html.ActionLink("Recipe List", "Index", null, new { @class = "btn btn-secondary mt-2 mx-2 col-md-12 btn-block" })
+
+
+
+
+            </div>
+
+            <!-- Sidebar Start -->
+            <div class="col-md-4 col-sm-12">
+
+                @if (ViewBag.showEdit == 1)
+                {
+                    <div class="offer-btn-wrap mb-4">
+                        @Html.ActionLink("Edit", "Edit", new { @id = Model.recipeId }, new { @class = "btn btn-info btn-md full-width" })
+                    </div>
+                }
+
+                @if (ViewBag.showDelete == 1)
+                {
+                    <div class="offer-btn-wrap mb-4">
+                        @Html.ActionLink("Delete", "Delete", new { @id = Model.recipeId }, new { @class = "btn btn-danger btn-md full-width" })
+                    </div>
+                }
+
+
+                <!-- Company Overview -->
+                <div class="tr-single-box">
+                    <div class="tr-single-header">
+                        <h4><i class="ti-direction"></i> Chef Overview</h4>
+                    </div>
+
+                    <div class="tr-single-body">
+                        <ul class="extra-service">
+                            <li>
+                                <div class="icon-box-icon-block">
+                                    <div class="icon-box-text">
+                                        <strong class="d-block">Name</strong>
+                                        @Model.chef.chefName
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="icon-box-icon-block">
+                                    <div class="icon-box-text">
+                                        <strong class="d-block">About</strong>
+                                        @Model.chef.chefBio
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="icon-box-icon-block">
+                                    <div class="icon-box-text">
+                                        <strong class="d-block">Email</strong>
+                                        @Model.chef.chefUsername
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <!-- /col-md-4 -->
+        </div>
+    </div>
+    <p class="fluid-container text-center col-md-12">
+    </p>
+</section>
+<!-- ============== Job Detail ====================== -->
+<!-- ============================ Agency Start ================================== -->
+<section style="padding:20px" class="bg-dark">
+    <div class="container">
+        <div class="row justify-content-center">
+
+            <div class="col text-center py-4">
+                
+
+                    <h2 class="text-light">Explore More Recipes</h2>
+                
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- section -->
+
+<section class="pt-1 pb-4">
+    <div class="container">
+        <div class="row">
+
+
+            @foreach (var item in ViewBag.recdRecipes)
+            {
+                <div class="col-lg-4 col-md-4 ">
+                    <!-- Signle Agency -->
+                    <div class="item">
+                        <div class="employer-wrap">
+
+                            @{ 
+                                var s = @Url.Content(item.recipeImagePath);
+                                s = '"' + s + '"';
+                            }
+                            <div class="employer-cover-image" style="background-image: url(@s)">
+                                <div class="employer-thumb">
+                                    <img alt="" src="@Url.Content(item.chef.chefImagePath)" class="avatar avatar-120 photo">
+                                </div>
+                            </div>
+                            <div class="employer-detail">
+                                <div class="employer-detail-inner">
+                                    <h4 class="employer-title">
+
+                                        <a href="@Url.Action("Details","Recipes",new { id=item.recipeId })"><h1 class=" display-6">@item.recipeTitle</h1></a>
+
+                                        
+
+                                    </h4>
+                                    <div class="employer-locations "><i class="ti-user"></i><a href="@Url.Action("Details","Chefs",new { id=item.chef.chefId })"> @item.chef.chefName</a></div>
+                                    <p>@item.cusine.cuisineName</p>
+                                    <p class="total-vacancy text-success">@item.recipeType</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </div>
+</section>
+<!-- ============================ Agency End ================================== -->

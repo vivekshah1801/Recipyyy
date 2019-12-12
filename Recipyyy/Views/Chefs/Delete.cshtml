@@ -1,0 +1,87 @@
+﻿@model Recipyyy.Models.Chef
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Chef</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Image
+        </dt>
+
+        <dd>
+            <img src="@Url.Content(Model.chefImagePath)" width="250" height="250" />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.chefName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.chefName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.chefUsername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.chefUsername)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.chefBio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.chefBio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.chefRating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.chefRating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.chefTipsEnable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.chefTipsEnable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.chefCreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.chefCreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.chefImagePath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.chefImagePath)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

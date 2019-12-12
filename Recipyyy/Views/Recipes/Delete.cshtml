@@ -1,0 +1,42 @@
+﻿@model Recipyyy.Models.Recipe
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="container col-md-8 justify-content-center mt-2 mb-4">
+    <h2>Are you sure to delete? <span class="text-danger">@Model.recipeTitle</span></h2>
+    <hr />
+
+    <!-- Single Job -->
+    <div class="col-md-8 justify-content-center" style="margin:auto">
+        <div class="job-grid style-1 justify-content-center">
+            <div class="job-grid-wrap">
+                <span class="job-type j-part-time">Part Time</span>
+                <div class="job-grid-thumb">
+                    <a href="job-detail.html"><img src="@Url.Content(Model.recipeImagePath)" class="img-fluid mx-auto" alt="" /></a>
+                </div>
+                <h4 class="job-title"><a href="job-detail.html">@Model.recipeTitle</a></h4>
+                <hr>
+                <div class="job-grid-detail">
+                    <p>@Model.recipeDescription</p>
+                </div>
+
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="job-grid-footer justify-content-center">
+                        <input type="submit" value="Delete" class="btn btn-danger  mt-2 mx-2 col-md-4" />
+                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-outline-danger mt-2 mx-2 col-md-4" })
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

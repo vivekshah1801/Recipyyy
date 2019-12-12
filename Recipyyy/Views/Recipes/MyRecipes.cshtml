@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Recipyyy.Models.Recipe>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.chef.chefName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cusine.cuisineName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recipeTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recipeDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recipeIngredients)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recipeDirection)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recipeServesFor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recipeType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recipeNutritionFacts)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recipeIsPrivate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recipePrepTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recipeLikes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recipeTags)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recipeCreationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recipeImagePath)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.chef.chefName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cusine.cuisineName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recipeTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recipeDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recipeIngredients)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recipeDirection)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recipeServesFor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recipeType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recipeNutritionFacts)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recipeIsPrivate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recipePrepTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recipeLikes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recipeTags)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recipeCreationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recipeImagePath)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.recipeId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.recipeId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.recipeId })
+        </td>
+    </tr>
+}
+
+</table>

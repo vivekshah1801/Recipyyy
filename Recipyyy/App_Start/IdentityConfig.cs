@@ -54,10 +54,10 @@ namespace Recipyyy
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
-                RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
+                RequireNonLetterOrDigit = false, // vivek  default true
+                RequireDigit = false, // vivek  default true
+                RequireLowercase = false, // vivek  default true
+                RequireUppercase = false, // vivek  default true
             };
 
             // Configure user lockout defaults

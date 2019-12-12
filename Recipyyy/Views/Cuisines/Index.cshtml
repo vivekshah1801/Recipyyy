@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Recipyyy.Models.Cuisine>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- ============================ Cuisine List ================================== -->
+<div class="container my-4">
+    
+    
+    <div class="row">
+        <div class="col text-center">
+            <div class="sec-heading mx-auto">
+                <h2>Cuisine List</h2>
+                
+                
+            </div>
+            <div class="input-with-icon col-md-12 mb-4" style="padding-left:0px;padding-right:0px">
+                <input type="text" id="search" placeholder="Search Here" class="form-control" />
+                <i class="ti-search mx-2"></i>
+            </div>
+            @Html.ActionLink("Create New", "Create",null, new {@class="btn btn-outline-primary btn-block"})
+        </div>
+        
+    </div>
+
+    
+
+    <div class="row">
+    
+    @foreach (var item in Model)
+    {
+        <!-- Single Job -->
+        <div class="col-md-3 search">
+            <div class="job-grid style-1">
+                <div class="job-grid-wrap">
+                    <span class="job-type j-part-time">Part Time</span>
+                    <div class="job-grid-thumb">
+                        <a href="job-detail.html"><img src="@Url.Content(item.cuisineImagePath)" class="img-fluid mx-auto" alt="" /></a>
+                    </div>
+                    <h4 class="job-title">@Html.ActionLink(@item.cuisineName, "Details", new { id = item.cuisineId })</h4>
+                    <hr>
+                    <div class="job-grid-detail">
+                        <p>@item.cuisineDescription</p>
+                    </div>
+                    <div class="job-grid-footer justify-content-center">
+                        
+                            @Html.ActionLink("Edit", "Edit", new { id = item.cuisineId }) &nbsp;|&nbsp;
+                            @Html.ActionLink("Details", "Details", new { id = item.cuisineId }) 
+
+                        @if (ViewBag.showDelete == 1)
+                        {
+                            
+                             @Html.ActionLink("Delete", "Delete", new { id = item.cuisineId }, new { @class = "mx-2 btn-outline-danger"})
+
+                        }
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+    </div>
+    @Html.ActionLink("Create New", "Create",null, new {@class="btn btn-outline-primary btn-block mt-4"})
+</div>
+<!-- ============================ Cuisine List End ================================== -->
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        function contains(t1, t2) {
+            if (t1.indexOf(t2) != -1) {
+                return true;
+            }
+        }
+
+        $("#search").keyup(function () {
+            var searchkey = $("#search").val().toLowerCase();
+            $(".search").each(function () {
+                if (!contains($(this).text().toLowerCase(), searchkey)) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+
+                }
+            })
+        });
+    });
+</script>

@@ -1,0 +1,194 @@
+﻿@model Recipyyy.Models.Recipe
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+@using (Html.BeginForm("Create", "Recipes", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <!-------------------------------------------------->
+    <div class="page-title-wrap">
+        <div class="container justify-content-center">
+            <div class="col-lg-12 col-md-12">
+                <div class="pt-caption">
+                    <h1>Add your recipy to Recipyyy's directory</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <!-- ============================ Hero Banner End ================================== -->
+
+
+    <!-- ============== Candidate Dashboard ====================== -->
+    <section class="tr-single-detail gray-bg" style="padding-top:40px; padding-bottom:40px;">
+        <div class="container col-md-8 justify-content-center">
+            <div class="row">
+
+                <!-- Sidebar Start -->
+                <!-- /col-md-4 -->
+
+                <div class="col-md-12 col-sm-12">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+
+                        <!-- My Profile -->
+                        <div class="tab-pane active container" id="c-profile">
+
+                            <!-- Company Information -->
+                            <div class="tr-single-box">
+                                <div class="tr-single-header">
+                                    <h4><i class="ti-home"></i> Recipe Details</h4>
+                                </div>
+
+                                <div class="tr-single-body">
+                                    <div class="row">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Recipe Title</label>
+                                                @Html.EditorFor(model => model.recipeTitle, new { htmlAttributes = new { @class = "form-control", required="required" } })
+                                                @Html.ValidationMessageFor(model => model.recipeTitle, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Description</label>
+                                                @Html.EditorFor(model => model.recipeDescription, new { htmlAttributes = new { @class = "form-control" ,required="required" } })
+                                                @Html.ValidationMessageFor(model => model.recipeDescription, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Recipe Type</label>
+                                                @Html.EditorFor(model => model.recipeType, new { htmlAttributes = new { @class = "form-control" ,required="required" } })
+                                                @Html.ValidationMessageFor(model => model.recipeType, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label>Cuisine</label>
+                                                <div>
+                                                    @Html.DropDownList("cuisineId", null, htmlAttributes: new { @id = "search-allow", @class = "form-control js-states form-control" })
+                                                    @Html.ValidationMessageFor(model => model.cuisineId, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Ingredients</label>
+                                                @Html.TextAreaFor(model => model.recipeIngredients, new { @class = "form-control" ,required="required" } )
+                                                @Html.ValidationMessageFor(model => model.recipeIngredients, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Directions</label>
+                                                @Html.TextAreaFor(model => model.recipeDirection, new { @class = "form-control" , required="required" })
+                                                @Html.ValidationMessageFor(model => model.recipeDirection, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Serves For Persons</label>
+                                                @Html.EditorFor(model => model.recipeServesFor, new { htmlAttributes = new { @class = "form-control" , required="required" } })
+                                                @Html.ValidationMessageFor(model => model.recipeServesFor, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Preparation Time</label>
+                                                @Html.EditorFor(model => model.recipePrepTime, new { htmlAttributes = new { @class = "form-control" , required="required" } })
+                                                @Html.ValidationMessageFor(model => model.recipePrepTime, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label>Recipe Photo</label>
+                                                <div class="custom-file">
+                                                    <input class="form-control custom-file-input" type="file" name="recipeImageFile" id="customFile" />
+                                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                                    @Html.ValidationMessageFor(model => model.recipeImagePath, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Nutrition Info</label>
+                                                @Html.EditorFor(model => model.recipeNutritionFacts, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.recipeNutritionFacts, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Recipe Tags</label>
+                                                @Html.EditorFor(model => model.recipeTags, new { htmlAttributes = new { @class = "form-control" , required="required" } })
+                                                @Html.ValidationMessageFor(model => model.recipeTags, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Private Recipe?  &nbsp;</label>
+                                                @Html.CheckBoxFor(model => model.recipeIsPrivate, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.recipeIsPrivate, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- /Basic Info -->
+
+                            <button type="submit" value="Create" class="btn btn-info btn-md full-width">Upload Recipe<i class="ml-2 ti-arrow-right"></i></button>
+                            @Html.ActionLink("Back to List", "Index",null, new { @class = "btn btn-secondary mt-3" })
+
+
+                        </div>
+
+                       
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-------------------------------------------------->
+
+
+
+
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

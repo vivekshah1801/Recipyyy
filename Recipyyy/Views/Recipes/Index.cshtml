@@ -1,0 +1,114 @@
+﻿@model IEnumerable<Recipyyy.Models.Recipe>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+<!-- ============================ Hero Banner  Start================================== -->
+<div class="page-title-wrap pt-img-wrap" style="background:url(../Content/img/RecipeBanner2.jpg) no-repeat;">
+    <div class="container">
+        <div class="col-lg-12 col-md-12">
+            <div class="pt-caption text-center">
+                <h1>Directory Of Deliciousness </h1>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-12 ">
+                        
+                        @Html.ActionLink("Add Recipe + ", "Create",null, new { @class="btn btn-outline-primary  bg-transparent" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<!-- ============================ Hero Banner End ================================== -->
+<!-- ============================ Blog Grid Start ================================== -->
+<section>
+    <div class="container">
+        <div class="input-with-icon col-md-12 mb-4" style="padding-left:0px;padding-right:0px">
+            <input type="text" id="search" placeholder="Search Here" class="form-control" />
+            <i class="ti-search mx-2"></i>
+        </div>
+        <div class="row">
+            <!--------------------------------------------->
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-4 search">
+                    <div class="blog-grid-wrap mb-4">
+                        <div class="blog-grid-thumb">
+                            <a href="blog-detail.html"><img src="@Url.Content(item.recipeImagePath)" class="img img-responsive" alt="" style="height:200px !important;"/></a>
+                            <div class="bg-cat-info">
+                                <div class="post-m-info">
+                                    <h5 class="pm-date">12</h5>
+                                    <h5 class="pm-month">Dec</h5>
+                                </div>
+                            </div>
+
+                            <h3 class="post-cat">@Html.DisplayFor(modelItem => item.recipeType)</h3>
+                            
+                            
+
+                        </div>
+                        <div class="blog-grid-content">
+                            <a href="@Url.Action("Details","Recipes",new { id=item.recipeId })"><h1 class=" display-6">@Html.DisplayFor(modelItem => item.recipeTitle)</h1></a>
+                            <h6><span class="text-muted">@Html.DisplayFor(modelItem => item.cusine.cuisineName)</span></h6>
+                            <p class="text-truncate">@Html.DisplayFor(modelItem => item.recipeDescription)</p>
+
+                            Tags:<span id="hashtags" class="text-info"> @Html.DisplayFor(modelItem => item.recipeTags)</span>
+                        </div>
+                        <div class="blog-grid-meta">
+                            <div class="gb-info-author">
+                                <p><strong>By </strong><u> @Html.ActionLink(item.chef.chefName, "Details","Chefs", new { id = item.chefId },null)</u></p>
+                            </div>
+                            <div class="gb-info-cmt">
+                                <ul>
+                                    <li>@Html.DisplayFor(modelItem => item.recipePrepTime)<i class="ti-timer"></i></li>
+                                    <li>@Html.DisplayFor(modelItem => item.recipeServesFor)<i class="ti-user"></i></li>
+                                    <li>@Html.DisplayFor(modelItem => item.recipeLikes)<i class="ti-heart"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+
+            }
+            <!--------------------------------------------->
+
+        </div>
+
+
+        
+
+    </div>
+</section>
+<div class="clearfix"></div>
+
+<!-- ============================ Blog Grid End ================================== -->
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        function contains(t1, t2) {
+            if (t1.indexOf(t2) != -1) {
+                return true;
+            }
+        }
+
+        $("#search").keyup(function () {
+            var searchkey = $("#search").val().toLowerCase();
+            $(".search").each(function () {
+                if (!contains($(this).text().toLowerCase(), searchkey)) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+
+                }
+            })
+        });
+    });
+</script>
